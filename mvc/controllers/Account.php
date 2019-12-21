@@ -268,6 +268,62 @@ class Account extends Controller
             ]);
         }
     }
-
+    public function Search()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+           $data = [
+               'user_fullname' => trim($_POST['text']),
+               'err' => '',
+               'count' => '',
+               'name' => trim($_POST['name']),
+               'lockkey' => '',
+           ];
+           if (isset($_POST['submit'])) {
+               
+               if (empty($data['user_fullname'])) {
+                   $data['err'] = "Bạn chưa nhập từ khóa!";
+                   $this->view('admin', [
+                    'page' => 'Search-account',
+                    'acc1' => $data
+                    
+                ]);
+               } else {
+                    if ($data['name'] == 1) {
+                            $data['name'] = 'email';
+                            $data['lockkey'] = 'Email';
+                    }
+                    if ($data['name'] == 2) {
+                        $data['name'] = 'user_fullname';
+                        $data['lockkey'] = 'Full Name';
+                    }
+                    
+                    if ($this->acc->TimKiemNvByAcc1($data['user_fullname'],$data['name'])) {
+                       
+                        $result = $this->acc->CountNvByAcc1($data['user_fullname'],$data['name']);
+                        $row = $result->fetch_array(MYSQLI_NUM);
+                        $data['count'] = htmlspecialchars($row[0], ENT_QUOTES);
+                        $data['err'] = 'Tìm kiếm '. $data['lockkey'].' với từ khóa: ' .$data['user_fullname'] . '<br> Có: '.  $data['count'] . ' kết quả';
+                        print_r($data);
+                        $this->view('admin', [
+                            'page' => 'Search-account',
+                            'acc' => $this->acc->TimKiemNvByAcc1($data['user_fullname'],$data['name']),
+                            'acc1' => $data
+                        ]);
+                    } else {
+                        $data['err'] = 'Tìm kiếm thất bại với từ khóa: ';
+                        $this->view('admin', [
+                        'page' => 'Search-account',
+                        'acc1' => $data
+                    ]);
+                    }
+                  
+               }
+               
+           }
+        } else {
+            # code...
+        }
+        
+    }
     
 }
