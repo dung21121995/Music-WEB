@@ -1,0 +1,140 @@
+<main id="main" class="site-main">
+
+    <div class="container">
+
+        <div class="row">
+        <div class="col-xl-3 col-md-3 col-sm-12">
+                <ul class="z-nav-top z-nav">
+                    <a role="button" title="bài hát" href="<?php echo BASE_URL ;?>User/song/<?php echo $_SESSION["id_user"];?>">
+                        <li class="active"> Bài Hát</li>
+                    </a>
+                    <a role="button" title="playlist" href="playlist.php">
+                        <li> Playlist</li>
+                    </a>
+                   
+                    <a role="button" title="tải lên" href="<?php echo BASE_URL?>User/uploadPage/<?php echo $_SESSION["id_user"] ;?>">
+                        <li> Tải lên</li>
+                    </a>
+                    <a role="button" title="hồ sơ" href="<?php echo BASE_URL ;?>User/Info/<?php echo $_SESSION["id_user"];?>">
+                        <li> Thông Tin</li>
+                    </a>
+                </ul>
+            
+            </div>
+            <div class="col-md-9 col-sm-12 mar-top-30">
+                <div class="row">
+                    <div class="col-sm-12 ">
+                        <div class="song-heading left">
+                            <strong>Tải Lên</strong>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="bod-upload">
+                    <form enctype="multipart/form-data" action="<?php echo BASE_URL;?>/User/uploadSong" 
+                        method="post" class="container">
+                        <div class="row edit-row">
+
+                            <div class="col-7">
+                                <span class="right" style="color: red">
+                                    <?php echo $data["result"]["link_err"]; ?></span>
+                                <div>Chọn file nhạc:</div>
+                                <div id="yourBtn" onclick="getFile()">Chọn bài hát </div>
+
+                                <div style='height: 0px;width: 0px; overflow:hidden;'>
+                                    <input id="upfile" type="file" value="upload" onchange="sub(this)" name="link_song">
+                                </div>
+
+                                <div class="form-group"><span class="right" style="color: red" class="right">
+                                        <?php echo $data["result"]["song_name_err"]; ?></span>
+                                    <label for="">Tên bài hát</label>
+                                    <input type="text" class="form-control" id="" name="song_name"
+                                        placeholder="<?php echo $data["result"]["song_name"]; ?>"> </div>
+
+
+                                <div class="form-group">
+                                    <span class="right" style="color: red">
+                                        <?php echo $data["result"]["singer_name_err"]; ?> </span>
+                                    <label for="">Ca Sĩ Thể Hiện</label>
+                                    <input type="text" class="form-control" id="" name="singer_name"
+                                        placeholder="<?php echo $data["result"]["singer_name"]; ?>"> </div>
+
+
+                                <div class="form-group">
+                                    <span class="right" style="color: red">
+                                        <?php echo $data["result"]["category_err"]; ?></span>
+                                    <label for="exampleFormControlSelect1">Thể loại</label>
+                                    <select class="form-control" id="exampleFormControlSelect1" name="category"
+                                        placeholder="<?php echo $data["result"]["category"]; ?>">
+                                        <?php
+                    while ($row= mysqli_fetch_array($data['category'])) {
+                        echo '<option>' . $row['category_name']  . '</option>';
+                    }
+                   ?>
+                                    </select> </div>
+                                <div class="form-group">
+                                    <label for="exampleFormControlTextarea1">Lời bài hát</label>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                                        name="lyric_song"
+                                        placeholder="<?php echo $data["result"]["lyric_name"]; ?>"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <button type="reset" class="btn btn-primary font-size-12">Nhập lại</button>
+                                    <button type="submit" name="submit" class="btn btn-primary right font-size-12">
+                                        Tải lên
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-5">
+                                <!-- <form enctype="multipart/form-data" action="#type your action here"> -->
+                                <div id="myfileupload">
+                                    <input type="file" id="upfile1" class="uploadfile" onchange="sub1(this);"
+                                        name="song_part_img" /> </div>
+
+
+                                <div id="yourBtn1">
+                                    <img alt="Thumb image" id="thumbimage" style="display: none" />
+                                    <div class="bottomright" onclick="sub1()">Chọn ảnh</div>
+                                    <span
+                                        style="color: red; font-size: 16px;"><?php echo $data["result"]["img_err"]; ?></span>
+                                    <a class="removeimg" href="javascript:">
+                                        <div class="topright removeimg">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+                <div class="row mar-top-20">
+                    <div class="col-7">
+                        <h5><strong> Hướng dẫn:</strong></h5>
+                        <small> - Tài khoản đã được kích hoạt và đăng nhập thành công. <br>
+
+                            - File upload không quá 120Mb, bit-rate 128kbs trở lên. <br>
+
+                            - Định dạng file upload: .mp3, .wma, .mp2, .asf, .wav, .wmv, .mp4, .flv, .mpg, .mpe, .avi,
+                            .3gp, .dat, .flac. <br>
+
+                            - Thời gian kiểm duyệt: 72 giờ (User Thường) và 12 giờ (User VIP). <br>
+
+                            - Hình ảnh bài hát (cover) phải có kích thước ít nhất là 640x640 pixel, hình ảnh video
+                            (cover) phải có kích thước ít nhất là 840x472 pixel. <br>
+                        </small>
+                    </div>
+                    <div class="col-5">
+                        <h5><strong> Quy định:</strong></h5>
+                        <small>
+                            - Bài hát đăng tải vi phạm nội dung cung cấp trong <a href=""> Thỏa thuận sử dụng</a> sẽ bị
+                            xóa khỏi hệ
+                            thống và tài khoản sẽ bị xóa vĩnh viễn. <br>
+                            - Hình ảnh có nội dung không phù hợp sẽ bị xóa.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

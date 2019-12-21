@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DCD Music | Thế Giới Âm Nhạc Dành Cho Bạn</title>
+    <link rel="shortcut icon" href="<?php echo BASE_URL ;?>/public/images/logo/logobar.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,700,700i,900&display=swap" rel="stylesheet">
+    <!-- Boostrap css -->
+    <link rel="stylesheet" href="<?php echo BASE_URL ;?>/public/vendors/boostrap/css/bootstrap.css">
+    <!-- font-awesome 5-->
+    <link rel="stylesheet" href="<?php echo BASE_URL ;?>public/vendors/fontawesome-free-5.10.2-web/css/all.css">
+    <!-- mdi icon -->
+    <link rel="stylesheet"
+        href="<?php echo BASE_URL ;?>public/vendors/MaterialDesign-Webfont-master/css/materialdesignicons.css">
+    <!-- select2.css -->
+    <link rel="stylesheet" href="<?php echo BASE_URL ;?>public/vendors/select2/css/select2.min.css">
+    <!-- datepicker.css -->
+    <link rel="stylesheet" href="<?php echo BASE_URL ;?>public/vendors/datepicker/datepicker.min.css">
+    <!-- slick -->
+    <link rel="stylesheet" href="<?php echo BASE_URL ;?>public/vendors/OwlCarousel2-2.3.4/owl.carousel.css">
+    <!-- main.css -->
+    <link rel="stylesheet" href="<?php echo BASE_URL ;?>public/css/main.css" media="all">
+    <link rel="stylesheet" href="<?php echo BASE_URL ;?>public/css/songplayer.css" media="all">
+    <link rel="stylesheet" href="<?php echo BASE_URL ;?>public/css/style.css" media="all">
+    <link rel="stylesheet" href="<?php echo BASE_URL ;?>public/css/playlist.css" media="all">
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+</head>
+
+<body>
+
+    <div id="wrapper">
+        <header id="header" class="site-header">
+            <div class="container position-relative">
+                <div class="row d-flex align-items-center">
+                    <div class="col-xl-2 col-lg-2 col-sm-12 site-brand">
+                        <div class="logo-wrapper">
+                            <a href="<?php echo BASE_URL ;?>"><img
+                                    src="<?php echo BASE_URL ;?>public/images/logo/logo-web.png" alt="logo"
+                                    width="90%"></a>
+                        </div>
+
+
+
+                        <div class="menu-mobile">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <!--.menu-mobile-->
+                    </div>
+                    <!--.col-xl-3-->
+                    <div
+                        class="col-xl-10 col-lg-10 col-sm-12 d-flex justify-content-between right-header-main position-relative">
+                        <nav class="main-menu">
+                            <ul>
+                                <li>
+                                    <a href="<?php echo BASE_URL ;?>">TRANG CHỦ</a>
+                                </li>
+                                <li>
+                                    <a href="#">TOP 100</a>
+                                </li>
+                                <li>
+                                    <a href="#">CHỦ ĐỀ</a>
+                                </li>
+                                <li>
+                                    <a href="#">MV</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo BASE_URL;?>Song/AllAlbum">ALBUM</a>
+                                </li>
+                                <li>
+                                    <a href="#">NGHỆ SĨ</a>
+                                </li>
+                                <?php if (isset($_SESSION["email"])) {?>
+                                    <li>
+                                    <a href="<?php echo BASE_URL ;?>User/song">NHẠC CÁ NHÂN</a>
+                                </li>
+                               <?php }?>
+                              
+                                <li>
+                                    <div class="search-area">
+                                        <button class=" btn-search">
+                                            <i class="fas fa-search" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                </li>
+                                <li></li>
+                                <li>
+                                    <?php if (isset($_SESSION['user_name'])) {?>
+                                <li>
+                                    <div class="dropdown">
+                                        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <?php if (isset($_SESSION["user_img"])) {?>
+
+                                            <div class="logo-wrapper1"><img
+                                                    src="<?php echo BASE_URL ;?>public/images/avatar/<?php echo $_SESSION['user_img'];?>"
+                                                    alt="avatar"></div>
+                                            <?php  }
+                                            else {?>
+                                            <img class="avatar" src="<?php echo BASE_URL ;?>public/images/icon/user.png"
+                                                alt="" width="40px" height="40px">
+                                            <?php  }?>
+
+
+
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item"
+                                                href="<?php echo BASE_URL ;?>User/song">
+                                                <div class="io">
+                                                    <div class="icon-io">
+                                                        <img src="<?php echo BASE_URL ;?>public/images/icon/playsongs.png"
+                                                            alt="iocn" width="16px" height="16px">
+                                                    </div>
+                                                    <div>
+                                                        <span>Nhạc Cá Nhân </span>
+                                                    </div>
+                                                </div>
+
+                                            </a>
+                                            <?php if($_SESSION['id_role'] == "A" or $_SESSION['id_role'] == "N" ){ ?>
+                                            <a class="dropdown-item" href="<?php echo BASE_URL ;?>Admin/Show">
+
+                                                <div class="io">
+                                                    <div class="icon-io">
+                                                        <img src="<?php echo BASE_URL ;?>public/images/icon/admin.png"
+                                                            alt="iocn" width="16px" height="16px">
+                                                    </div>
+                                                    <div>
+                                                        <span>Trang Admin </span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <?php }?>
+                                            <a class="dropdown-item" href="#"><?php echo $_SESSION['2']; ?></a>
+                                            <a href="<?php echo BASE_URL ;?>Home/logout" class="dropdown-item">
+                                                <div class="io">
+                                                    <div class="icon-io">
+                                                        <img src="<?php echo BASE_URL ;?>public/images/icon/logout.png"
+                                                            alt="iocn" width="16px" height="16px">
+                                                    </div>
+                                                    <div>
+                                                        <span>Đăng Xuất </span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+
+                                    </div>
+                                </li>
+
+                                <?php } else { ?>
+                                <li>
+
+                                    <a href="<?php echo BASE_URL;?>/Home/Login"><i class="fas fa-user"></i> Đăng
+                                        Nhập</a>
+                                    <?php }?>
+                                </li>
+                            </ul>
+                        </nav>
+                        <div class="search-header">
+                            <form action="<?php echo BASE_URL?>Home/Search" method="POST">
+                                <input type="text" name="search" placeholder="Tim tên bài hát, ca sĩ...">
+                                <button type="submit" name="submit"><i class="fas fa-search"
+                                        aria-hidden="true"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- End Header -->
+
+        <!-- Body -->
+        <?php  include "./mvc/views/page/".$data['side-bar'].".phtml";?>
+        <?php  include "./mvc/views/page/".$data['page'].".phtml";?>
+        <!--End Body  -->
+
+        <!-- Footer -->
+        <footer id="footer" class="site-footer">
+            <div class="container">
+                <div class="contents">
+                    <div class="contents-item product-code">
+                        <div class="item-fir imgs">
+                            <img src="<?php echo BASE_URL ;?>public/images/logo/logobar.png" alt="" width="100%">
+                        </div>
+
+                        <div class="item-fir name-coder">
+                            <p>Một Sản Phẩm Của DCD Disk</p>
+                        </div>
+
+                    </div>
+
+                    <div class="contents-item product-code">
+                        <div class="item-sec">
+                            <a href="#"><img src="<?php echo BASE_URL ;?>public/images/icon/facebook.svg" alt=""
+                                    width="100%"></a>
+                        </div>
+
+                        <div class="item-sec">
+                            <a href="#"><img src="<?php echo BASE_URL ;?>public/images/icon/youtube.svg" alt=""
+                                    width="100%"></a>
+                        </div>
+                        <div class="item-sec">
+                            <a href="#"><img src="<?php echo BASE_URL ;?>public/images/icon/instagram.svg" alt=""
+                                    width="100%"></a>
+                        </div>
+                    </div>
+                    <div class="contents-item product-code">
+                        <div class="item-thi">
+                            <a href="">Giới thiệu</a>
+                        </div>
+                        <div class="item-thi">
+                            <a href=""> Quảng cáo</a>
+                        </div>
+                        <div class="item-thi">
+                            <a href=""> Góp ý</a>
+                        </div>
+                    </div>
+                    <div class="contents-item">
+                        <p>Copyright© 2019 - Bản quyền thuộc DCD Team </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </footer>
+        <!-- End Footer -->
+    </div>
+    <!-- jquery-3.4.1.min.js -->
+    <script src="<?php echo BASE_URL ;?>public/vendors/jquery/jquery-3.4.1.min.js"></script>
+    <!-- select2.js -->
+    <script src="<?php echo BASE_URL ;?>public/vendors/select2/js/select2.full.min.js"></script>
+    <!-- datepicker.js -->
+    <script src="<?php echo BASE_URL ;?>public/vendors/datepicker/datepicker.min.js"></script>
+    <!-- boostrap.js -->
+    <script src="<?php echo BASE_URL ;?>public/vendors/boostrap/js/bootstrap.js"></script>
+    <!-- slick -->
+    <script src="<?php echo BASE_URL ;?>public/vendors/OwlCarousel2-2.3.4/owl.carousel.js"></script>
+    <!-- main.js -->
+    <script src="<?php echo BASE_URL ;?>public/js/main.js"></script>
+    <script src="<?php echo BASE_URL ;?>public/js/mypage.js"></script>
+    <script src="<?php echo BASE_URL ;?>public/js/playalbum.js"></script>
+
+</body>
+
+</html>

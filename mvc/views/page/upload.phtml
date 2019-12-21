@@ -1,0 +1,132 @@
+<main id="main" class="site-main">
+    <div class="container">
+        <div class="row ">
+           
+                <div class="col-xl-3 col-md-3 col-sm-12">
+                    <ul class="z-nav-top z-nav">
+                        <a role="button" title="bài hát"
+                            href="<?php echo BASE_URL ;?>User/song/<?php echo $_SESSION["id_user"];?>">
+                            <li> Bài Hát</li>
+                        </a>
+                        <a role="button" title="playlist" href="playlist.php">
+                            <li> Playlist</li>
+                        </a>
+
+                        <a role="button" title="tải lên"
+                            href="<?php echo BASE_URL?>User/uploadPage/<?php echo $_SESSION["id_user"] ;?>">
+                            <li class="active"> Tải lên</li>
+                        </a>
+                        <a role="button" title="hồ sơ"
+                            href="<?php echo BASE_URL ;?>User/Info/<?php echo $_SESSION["id_user"];?>">
+                            <li> Thông Tin</li>
+                        </a>
+                    </ul>
+                </div>
+                <div class="col-md-9 col-sm-12 mar-top-30">
+                    <div class="row">
+                        <div class="col-sm-12 ">
+                            <div class="song-heading left">
+                                <strong>Danh Sách Tải Lên</strong>
+                            </div>
+                            <div class="right">
+                                <!-- <a href="">
+                                <button type="button" class="btn btn-info">
+                                    Nghe tất cả
+                                </button>
+                            </a> -->
+                                <a href="<?php echo BASE_URL;?>User/upload">
+                                    <button type="button" class="btn btn-success">
+                                        Tải nhạc lên
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <?php if(isset($data["result"]["err"])) {
+                        echo $data["reult"]["err"];
+                    }?>
+                    <?php  while($row=mysqli_fetch_array($data["songUpload"])){?>
+                    <div class="row">
+
+                    <div class="col-xl-3 col-lg-3 col-sm-1 deleteButon"> <a href="" data-toggle="modal"
+                                data-target="#exampleModal2<?php echo $row['id_song']; ?>"><img
+                                    src="<?php echo BASE_URL;?>public/images/icon/error.svg" alt="" width="10px"></a>
+                        </div>
+                        <div class="col-xl-9 col-lg-9 col-sm-11">
+                            <ul class="ranking">
+                                <li>
+                                    <a href="<?php echo BASE_URL ;?>Song/Listenit/<?php echo $row["id_song"]?>">
+                                        <div class="song">
+                                            <div class="song-item song-image">
+                                                <img src="<?php echo BASE_URL ;?>public/images/<?php echo $row["song_img"]?>"
+                                                    alt="#">
+                                            </div>
+                                            <div class="song-item song-info1">
+                                                <p class="song-name">
+                                                    <?php echo mb_strtoupper($row["song_name"]); ?>
+                                                </p>
+                                                <p class="singer">
+
+                                                    <?php echo $row["singer_name"]; ?>
+                                                </p>
+                                            </div>
+
+                                            <div class="song-item approval">
+                                                <?php if ($row["status_song"] == '1') {?>
+                                                <p style="color:green;">
+                                                    Công Khai
+                                                </p>
+                                                <?php }
+                                        else {?>
+                                                <p style="color:red;">
+                                                    Chờ Phê Duyệt
+                                                </p>
+                                                <?php }?>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+
+                        </div>
+                        
+                        <div class="modal fade" id="exampleModal2<?php echo $row['id_song']; ?>" tabindex="-1"
+                            role="dialog" aria-labelledby="exampleModalLabel2<?php echo $row['id_user'] ?>"
+                            aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel2<?php echo $row['id']; ?>">Xóa Bài
+                                            Hát</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form
+                                            action="<?php echo BASE_URL?>User/DeleteSongs/<?php echo $row['id_song']; ?>"
+                                            method="post" enctype="multipart/form-data">
+                                            <div class="form-group">
+                                                <fieldset disabled>
+                                                    <div class="form-group">
+                                                        <label for="disabledTextInput">Bạn Có Muốn Xóa Bài hát ?</label>
+                                                        <input type="text" id="disabledTextInput" class="form-control"
+                                                            placeholder="<?php echo $row['song_name'] ?>">
+                                                    </div>
+                                                </fieldset>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary right" name="submit">Xác nhận
+                                                xóa</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <?php }?>
+
+                </div>
+          
+        </div>
+</main>

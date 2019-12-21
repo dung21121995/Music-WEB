@@ -1,0 +1,202 @@
+<form action="<?php echo BASE_URL?>Song/Search/<?php echo $data['search']['text']; ?>" method="POST">
+    <div class="input-group mb-2 mr-sm-2">
+        <input type="text" class="form-control right" id="inlineFormInputGroupUsername2" placeholder="Search..." name="text">
+        <button type="submit" name="submit" class="btn btn-info" style="margin-left: -2px;">
+            <img src="<?php echo BASE_URL?>public/images/magnifying-glass.png" alt="icon"> Search
+        </button>
+    </div>
+</form>
+<table class="table table-striped bg-cl-table">
+    <div>
+        <p class="cen-ad" style="color: red"> <?php echo $data['result']['err'] . $row['user_name']; ?></p>
+        <h1 class="cen-ad">Bài Hát Chờ Phê Duyệt</h1>
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">
+                <input type="checkbox" name="check" class="checkbox" onclick="checkall('item', this)" id=""> Tất Cả
+            </th>
+                <th scope="col">Bài Hát</th>
+                <th scope="col">Ca Sĩ</th>
+                <th scope="col">Tài Khoản đăng lên</th>
+                <th scope="col">Ngày đăng </th>
+                <th scope="col">Thông tin</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            $count = 1;
+            while ($row = mysqli_fetch_array($data['listsong'])) {
+                ?>
+                <tr>
+                    <th scope="row"><?php echo $count; ?></th>
+                    <td><input type="checkbox" name="id[]" id="" class="item" class="checkbox"></td>
+                    <td><?php echo $row['song_name']; ?></td>
+                    <td><?php echo $row['singer_name']; ?></td>
+                    <td><?php echo $row['user_name']; ?></td>
+                    <td><?php echo $row['date_add'];?></td>
+                    <td><a href="" data-toggle="modal" data-target="#exampleModal1<?php echo $row['id'] ?>">Chi Tiết</a></td>
+                    <!-- Modal Infor-->
+                    <div class="modal fade" id="exampleModal1<?php echo $row['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1<?php echo $row['id'] ?>" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel1<?php echo $row['id'] ?>">Thông tin bài hát</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div style="text-align: center;">
+                                        <img src="<?php echo BASE_URL?>public/images/<?php echo $row['song_img']; ?>" alt="Error" width="150px" height="150px" style="border-radius: 20px;">
+                                    </div>
+
+                                    <div style="text-align: center; margin: 10px 0px;">
+                                        <audio controls>
+                                            <source src="<?php echo BASE_URL?>public/songs/<?php echo $row['link_song']; ?>" type="audio/mpeg">
+                                        </audio>
+                                    </div>
+                                    <div>
+                                        <p>-Tên bài hát: <span style="color: blue"> <?php echo $row['song_name']; ?></span></p>
+                                    </div>
+                                    <div>
+                                        <p>-Tên ca sĩ:<span style="color: blue"> <?php echo $row['singer_name']; ?></span></p>
+                                    </div>
+                                    <div>
+                                        <p>-Trạng thái: <span style="color: blue">
+                                                <?php if ($row['status_song'] == 1) {
+                                                        echo "Đã đăng";
+                                                    } else {
+                                                        echo "Đang chờ phê duyệt";
+                                                    }
+                                                    ?>
+                                            </span></p>
+                                    </div>
+                                    <div>
+                                        <p>-Album: <?php echo $row['album_name']; ?></p>
+                                    </div>
+                                    <div>
+                                        <p>-Lời bài hát:  
+                                            <?php if ($row['status_song'] == ''){
+                                                echo $row['liycs_song'];
+                                            } else {
+                                                echo "Chưa Cập Nhật";
+                                            }?>
+                                        </p>
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Modal Infor -->
+                   
+                    <td><a href="" data-toggle="modal" data-target="#exampleModal21<?php echo $row['id_song']; ?>">Phê Duyệt</a></td>
+                    <!-- Modal yes -->
+                    <div class="modal fade" id="exampleModal21<?php echo $row['id_song']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel21<?php echo $row['id_user'] ?>" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel21<?php echo $row['id']; ?>">Phê duyệt tài khoản</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="<?php echo BASE_URL?>Approval/Yes/<?php echo $row['id_song']; ?>" method="post" enctype="multipart/form-data">
+                                        <div class="form-group">
+                                            <fieldset disabled>
+                                                <div class="form-group">
+                                                    <label for="disabledTextInput">Bài Hát:</label>
+                                                    <input type="text" id="disabledTextInput" class="form-control" placeholder="<?php echo $row['song_name'] ?>">
+                                                </div>
+                                            </fieldset>
+                                            <fieldset disabled>
+                                                <div class="form-group">
+                                                    <label for="disabledTextInput">Tên ca sĩ:</label>
+                                                    <input type="text" id="disabledTextInput" class="form-control" placeholder="<?php echo $row['singer_name'] ?>">
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary right" name="submit">Xác nhận đăng</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <td><a href="" data-toggle="modal" data-target="#exampleModal2<?php echo $row['id_song']; ?>">Xóa</a></td>
+                    <!-- Modal delete-->
+                    <div class="modal fade" id="exampleModal2<?php echo $row['id_song']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2<?php echo $row['id_user'] ?>" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel2<?php echo $row['id']; ?>">Xóa tài khoản</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="<?php echo BASE_URL?>Approval/DeleteSong/<?php echo $row['id_song']; ?>" method="post" enctype="multipart/form-data">
+                                        <div class="form-group">
+                                            <fieldset disabled>
+                                                <div class="form-group">
+                                                    <label for="disabledTextInput">Bạn Có Muốn Xóa Bài hát ?</label>
+                                                    <input type="text" id="disabledTextInput" class="form-control" placeholder="<?php echo $row['song_name'] ?>">
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary right" name="submit">Xác nhận xóa</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </tr>
+            <?php 
+        $count++; } ?>
+        </tbody>
+
+</table>
+<div class="cen-ad" style="font-size: 18px;">Tổng Bài Hát: <kbd><?php echo $data['page1']['total_records'] ?></kbd></div>
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <li class="page-item">
+            <?php
+            $pre = $data['page1']['current_page'] - 1;
+            if ($pre <= 0) {
+                $pre = 1;
+            }
+            $next = $data['page1']['current_page'] + 1;
+            if ($next >= $data['page1']['total_page']) {
+                $next = $data['page1']['total_page'];
+            }
+            ?>
+            <a class="page-link" href="<?php echo BASE_URL?>Approval/Page/<?php echo $pre; ?>" tabindex="-1" aria-disabled="true">
+                Trước</a></li>
+        <?php
+         for ($i = 1; $i <= $data["page1"]['total_page']; $i++) {
+            if ($i == $data["page1"]['current_page']) {?>
+
+        <li class='page-item'>
+            <a class="page-link1" href="<?php echo BASE_URL;?>/Approval/Page/<?php echo $i?>"><?php echo $i?></a>
+        </li>
+        <?php } else {?>
+
+        <a class="page-link" href="<?php echo BASE_URL;?>Approval/Page/<?php echo $i?>"><?php echo $i?></a>
+        </li>
+        <?php   } ?>
+        </li>
+        <?php
+        }
+        // }
+        ?>
+        <li class="page-item">
+            <a class="page-link" href="<?php echo BASE_URL?>Approval/Page/<?php echo $next; ?>">Sau</a>
+        </li>
+    </ul>
+</nav>

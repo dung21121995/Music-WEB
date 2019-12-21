@@ -1,0 +1,27 @@
+<main id="main" class="site-main">
+    <div class="container">
+        <h3>Việt Nam</h3>
+        <div class="row mb-40 ">
+            <?php  while($row=mysqli_fetch_array($data["allalbum"])){?>
+            <div class="col-xl-2 col-lg-2 col-sm-6">
+                
+                    <a href="<?php echo BASE_URL;?>Song/AlbumShow/<?php echo $row["id_album"];?>">
+                  
+                        <div class="hovereffect">
+                            <img class="img-responsive"
+                                src="<?php echo BASE_URL;?>public/images/Album/<?php echo $row["alnum_img"];?>" alt="" width="100%">
+                            <div class="overlay">
+                                <h2>  <?php echo ucwords($row["album_name"]);?></h2>
+                                
+                            </div>
+                        </div>
+                    </a>
+                
+            </div>
+            <?php }?>
+
+        </div>
+
+    </div>
+
+</main>

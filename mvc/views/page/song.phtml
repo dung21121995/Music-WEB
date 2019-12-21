@@ -1,0 +1,58 @@
+<main id="main" class="site-main">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-3 col-md-3 col-sm-12">
+                <ul class="z-nav-top z-nav">
+                    <a role="button" title="bài hát" href="<?php echo BASE_URL ;?>User/song/<?php echo $_SESSION["id_user"];?>">
+                        <li class="active"> Bài Hát</li>
+                    </a>
+                    <a role="button" title="playlist" href="playlist.php">
+                        <li> Playlist</li>
+                    </a>
+                   
+                    <a role="button" title="tải lên" href="<?php echo BASE_URL?>User/uploadPage/<?php echo $_SESSION["id_user"] ;?>">
+                        <li> Tải lên</li>
+                    </a>
+                    <a role="button" title="hồ sơ" href="<?php echo BASE_URL ;?>User/Info/<?php echo $_SESSION["id_user"];?>">
+                        <li> Thông Tin</li>
+                    </a>
+                </ul>
+            
+            </div>
+            <div class="col-md-9 col-sm-12 mar-top-30">
+                <div class="row">
+                    <div class="col-sm-12 ">
+                        <div class="song-heading left">
+                            <strong>Bài Hát</strong>
+                        </div>
+                        <div class="right">
+                            <button type="button" class="btn btn-info">
+                                Nghe tất cả
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <ul class="w-100 mg-t-5">
+                        <li class="pd-5 bd-bt">
+                            <?php if( $data['song']->id_user_save == $_SESSION['id_user']) : ?>
+                            <a href="#">
+                                <div class="flex">
+                                    <img src="<?php echo $data['song']->song_part_img; ?>" alt="" width="40px"
+                                        height="40px" class="mg-r-10">
+                                    <div class="w-60"><?php echo $data['song']->song_name; ?> <br>
+                                        <small><?php echo $data['song']->singer_name; ?></small>
+                                    </div>
+                                    <small><?php echo $data['song']->song_time; ?></small>
+                                </div>
+                            </a>
+                            <?php endif; ?>
+                        </li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

@@ -1,0 +1,158 @@
+<main id="main" class="site-main">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-3 col-md-3 col-sm-12">
+                <ul class="z-nav-top z-nav">
+                    <a role="button" title="bài hát"
+                        href="<?php echo BASE_URL ;?>User/song/<?php echo $_SESSION["id_user"];?>">
+                        <li> Bài Hát</li>
+                    </a>
+                    <a role="button" title="playlist" href="playlist.php">
+                        <li> Playlist</li>
+                    </a>
+
+                    <a role="button" title="tải lên"
+                        href="<?php echo BASE_URL?>User/uploadPage/<?php echo $_SESSION["id_user"] ;?>">
+                        <li> Tải lên</li>
+                    </a>
+                    <a role="button" title="hồ sơ"
+                        href="<?php echo BASE_URL ;?>User/Info/<?php echo $_SESSION["id_user"];?>">
+                        <li class="active"> Thông Tin</li>
+                    </a>
+                </ul>
+
+            </div>
+            <div class="col-md-9 col-sm-12 mar-top-30">
+                <div class="row">
+                    <div class="col-sm-12 ">
+
+                        <!-- thông tin tài khoản -->
+                        <?php
+                    include('infor-acc.php')
+                    ?>
+
+                        <!-- thông tin cá nhân -->
+                        <div class="mg-t-l-15">
+                            <div class="container">
+                                <!-- Trigger the modal with a button -->
+                                <a href="" class="right info-cl font-size-12" data-toggle="modal"
+                                    data-target="#myModal12">Chỉnh Sửa</a>
+                                <div id="myModal12" class="modal fade" role="dialog">
+                                    <div class="modal-dialog">
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="md-hd-cl">
+                                                <h5>Thay đổi thông tin cá nhân</h5>
+                                                <button type="button" class="close"
+                                                    data-dismiss="modal">&times;</button>
+
+                                            </div>
+                                            <div class="modal-body">
+                                                <!-- <p>Nội dung của Modal.</p> -->
+                                                <form class="container">
+                                                    <div class="form-group">
+                                                        <label for="formGroupExampleInput">Họ và tên:</label>
+                                                        <input type="text" class="form-control"
+                                                            id="formGroupExampleInput" placeholder="....">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="formGroupExampleInput2">Giới tính:</label>
+                                                        <input type="text" class="form-control"
+                                                            id="formGroupExampleInput2" placeholder="...">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="formGroupExampleInput2">Ngày sinh:</label>
+                                                        <input type="text" class="form-control"
+                                                            id="formGroupExampleInput2" placeholder=".....">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="formGroupExampleInput2">Địa chỉ</label>
+                                                        <input type="text" class="form-control"
+                                                            id="formGroupExampleInput2" placeholder="....">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="formGroupExampleInput2">Email</label>
+                                                        <input type="text" class="form-control"
+                                                            id="formGroupExampleInput2" placeholder="......">
+                                                    </div>
+                                                    <a href="profile.php"><button type="button"
+                                                            class="btn btn-info right">
+                                                            Xác nhận
+                                                        </button></a>
+                                                    <button type="reset" class="btn btn-info left"> Nhập lại</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <h6 class="info-cl mg-l-30 mg-bt-15">THÔNG TIN CÁ NHÂN</h6>
+                            <div class="mg-l-30">
+                                <div class="infomation">
+                                    <div class="info-item smail">
+                                        <small style="color: #8a8a8b;"> Họ và tên:</small>
+                                    </div>
+                                    <div class="info-item card-text">
+                                        <span><?php echo $data["dataUser"]["user_fullname"]?></span>
+                                    </div>
+
+                                </div>
+
+                                <hr>
+                                <div class="infomation">
+                                    <div class="info-item smail">
+                                        <small style="color: #8a8a8b;"> Ngày sinh</small>
+                                    </div>
+                                    <div class="info-item card-text">
+                                        <span>
+                                            <?php if (isset($data["dataUser"]["birthday"])) {
+                                                echo $data["dataUser"]["birthday"];
+                                            }else {
+                                                 echo "Chưa Cập Nhật";
+                                            }?>
+                                        </span>
+                                    </div>
+                                </div>
+
+
+                                <hr>
+                                <div class="infomation">
+                                    <div class="info-item smail">
+                                        <small style="color: #8a8a8b;"> Địa chỉ</small>
+                                    </div>
+                                    <div class="info-item card-text">
+                                        <span>
+                                            <?php if (isset($data["dataUser"]["address"])) {
+                                                echo $data["dataUser"]["address"];
+                                            }else {
+                                                echo "Chưa Cập Nhật";
+                                            }?>
+                                        </span>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="infomation">
+                                    <div class="info-item smail">
+                                        <small style="color: #8a8a8b;"> Email:</small>
+                                    </div>
+                                    <div class="info-item card-text">
+                                        <span>
+                                            <?php if (isset($data["dataUser"]["email"])) {
+                                               echo $data["dataUser"]["email"];
+                                            }else {
+                                                echo "Chưa Cập Nhật";
+                                            }?>
+                                        </span>
+                                    </div>
+                                </div>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

@@ -1,0 +1,242 @@
+<main id="main" class="site-main">
+
+    <div class="container">
+        <div class="row mb-40 ranks">
+            <div class="col-xl-8 col-lg-8 col-sm-12" style="padding: 0px;">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <a href="#">
+                                <img class="d-block w-100" src="./public/images/logo music png.png" alt="First slide">
+                            </a>
+                        </div>
+                        <div class="carousel-item">
+                            <a href="#">
+                                <img class="d-block w-100" src="./public/images/banner.jpg" alt="Second slide">
+                            </a>
+                        </div>
+                        <div class="carousel-item">
+                            <a href="#">
+                                <img class="d-block w-100" src="./public/images/banner.jpg" alt="Third slide">
+                            </a>
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+            <!-- Rank Song -->
+            <div class="col-xl-4 col-lg-4 col-sm-12">
+                <ul class="ranking1">
+                    <?php $count=1?>
+                    <?php  while($row=mysqli_fetch_array($data["topview"])){?>
+                    <li>
+                        <a href="./Song/Listenit/<?php echo $row["id_song"]?>">
+                            <div class="song">
+                                <?php switch ($count) {
+                                case '1':?>
+                                <div class="song-item song-rank" style="color:#4a90e2;">
+                                    <?php echo "0".$count;?>
+                                </div>
+                                <?php  break; 
+                                 case '2':?>
+                                <div class="song-item song-rank" style="color:#50e3c2;">
+                                    <?php echo "0".$count;?>
+                                </div>
+                                <?php    break; 
+                                      case '3':?>
+                                <div class="song-item song-rank" style="color:red;">
+                                    <?php echo "0".$count;?>
+                                </div>
+                                <?php  break; 
+                                default:?>
+                                <div class="song-item song-rank" style="color:#fff;">
+                                    <?php echo "0".$count;?>
+                                </div>
+                                <?php  break;
+                            } ?>
+
+                                <div class="song-item song-image">
+                                    <img src="<?php echo BASE_URL ;?>public/images/<?php echo $row["song_img"]?>"
+                                        alt="">
+                                </div>
+                                <div class="song-item song-info">
+                                    <p class="song-name">
+                                        <?php echo ucwords($row['song_name']);?>
+                                    </p>
+                                    <p class="singer">
+
+                                        <?php echo $row['singer_name'];?>
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <?php $count++;}?>
+                </ul>
+            </div>
+        </div>
+        <div class="row mb-40">
+            <div class="col">
+                <h3 class="">Có Thể Bạn Muốn Nghe</h3>
+                <div class="catergory owl-carousel owl-theme">
+                    <?php  while($row=mysqli_fetch_array($data["topAlbum"])){?>
+                    <div class="album-item">
+                        <a href="<?php echo BASE_URL;?>Song/AlbumShow/<?php echo $row["id_album"];?>">
+                            <img src="<?php echo BASE_URL ;?>public/images/Album/<?php echo $row["alnum_img"]?>" alt="">
+                            <div class="album">
+                                <div class="album-info1">
+                                    <p class="album-name">
+                                        <?php echo ucwords($row["album_name"]);?>
+                                    </p>
+                                    <p class="singer">
+
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <?php } ?>
+                </div>
+            </div>
+
+        </div>
+        <div class="row mb-40">
+            <div class="col">
+                <h3 class="">Chủ đề và thể loại</h3>
+                <div class="catergory owl-carousel">
+                    <?php  while($row=mysqli_fetch_array($data["a"])){?>
+                    <div class="catergory-item">
+                        <a href="#">
+                            <img src="<?php echo BASE_URL;?>/public/images/catergory/<?php  echo $row["category_img"]?>" alt="img" style="filter:brightness(50%);">
+                            <div class="img-text"><p><?php echo ucwords($row["category_name"]);?></p></div>
+                        </a>
+                    </div>
+                    <?php }?>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="row mb-40">
+            <div class="col">
+                <h3 class="">GIAI ĐIỆU YÊU THƯƠNG</h3>
+                <div class="catergory owl-carousel owl-theme">
+                    <?php  while($row=mysqli_fetch_array($data["album3"])){?>
+                    <div class="album-item">
+                        <a href="<?php echo BASE_URL;?>Song/AlbumShow/<?php echo $row["id_album"];?>">
+                            <img src="<?php echo BASE_URL ;?>public/images/Album/<?php echo $row["alnum_img"]?>" alt="">
+                            <div class="album">
+                                <div class="album-info1">
+                                    <p class="album-name">
+                                        <?php echo ucwords($row["album_name"]);?>
+                                    </p>
+                                    <p class="singer">
+
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <?php } ?>
+                </div>
+            </div>
+
+        </div>
+        <div class="row mb-40">
+            <div class="col">
+                <h3 class="">NỔI BẬT</h3>
+                <div class="catergory owl-carousel owl-theme">
+                    <?php  while($row=mysqli_fetch_array($data["album2"])){?>
+                    <div class="album-item">
+                        <a href="<?php echo BASE_URL;?>Song/AlbumShow/<?php echo $row["id_album"];?>">
+                            <img src="<?php echo BASE_URL ;?>public/images/Album/<?php echo $row["alnum_img"]?>" alt="">
+                            <div class="album">
+                                <div class="album-info1">
+                                    <p class="album-name">
+                                        <?php echo ucwords($row["album_name"]);?>
+                                    </p>
+                                    <p class="singer">
+
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <?php } ?>
+                </div>
+            </div>
+
+        </div>
+        <div class="row mb-40">
+            <div class="col">
+                <h3 class="">ALBUM HOT</h3>
+                <div class="catergory owl-carousel owl-theme">
+                    <?php  while($row=mysqli_fetch_array($data["album"])){?>
+                    <div class="album-item">
+                        <a href="<?php echo BASE_URL;?>Song/AlbumShow/<?php echo $row["id_album"];?>">
+                            <img src="<?php echo BASE_URL ;?>public/images/Album/<?php echo $row["alnum_img"]?>" alt="">
+                            <div class="album">
+                                <div class="album-info1">
+                                    <p class="album-name">
+                                        <?php echo ucwords($row["album_name"]);?>
+                                    </p>
+                                    <p class="singer">
+
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <?php } ?>
+                </div>
+            </div>
+
+        </div>
+        <h3 class="">BÀI HÁT MỚI</h3>
+        <div class="row mb-40 ">
+
+            <?php  while($row=mysqli_fetch_array($data["newsong"])){?>
+            <div class="col-xl-4 col-lg-4 col-sm-6">
+                <ul class="ranking">
+
+                    <li>
+                        <a href="./Song/Listenit/<?php echo $row["id_song"]?>">
+                            <div class="song">
+                                <div class="song-item song-image">
+                                    <img src="./public/images/<?php echo $row["song_img"]?>" alt="#">
+                                </div>
+                                <div class="song-item song-info1">
+                                    <p class="song-name">
+                                        <?php echo mb_strtoupper($row["song_name"]); ?>
+                                    </p>
+                                    <p class="singer">
+
+                                        <?php echo $row["singer_name"]; 
+                                       
+                                    ?>
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+            <?php }?>
+            <!-- <div class="col-xl-1 col-lg-1 col-sm-6"></div> -->
+        </div>
+    </div>
+
+</main>

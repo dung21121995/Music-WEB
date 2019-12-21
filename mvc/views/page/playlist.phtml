@@ -1,0 +1,119 @@
+<main id="main" class="site-main">
+    <div class="container">
+
+        <div class="row">
+            
+                <div class="holder">
+                    <div class="album1">
+
+                        <img src="<?php echo BASE_URL ;?>public/images/album/<?php echo $data["albums"]["alnum_img"]?>"
+                            alt="">
+                    </div>
+                    <div class="currently-playing">
+                        <h2 class="song-name1"></h2>
+
+                        <h4 class="song-name1">Album: <?php echo $data["albums"]["album_name"]?></h4>
+                    </div>
+
+                    <div class="panel panel-default audio-panel">
+                        <audio id="audio" autoplay preload="auto" tabindex="0" controls>
+                            <source src="" type="audio/mpeg">
+                        </audio>
+
+                    </div>
+                </div>
+           
+        </div>
+
+
+        <div class="row mb-40 ">
+            <div class="col-xl-8 col-lg-8 col-sm-12">
+                <h3>Danh Sách Bài Hát</h3>
+                <ul id="playlist">
+                    <?php  while($row=mysqli_fetch_array($data["datasong"])){?>
+                    <li class="list-group-item">
+                        <a href="<?php echo BASE_URL ;?>public/songs/<?php echo $row["link_song"]?>">
+                            <div class="song">
+                                <div class="song-item song-image">
+                                    <img src="<?php echo BASE_URL ;?>/public/images/<?php echo $row["song_img"]?>"
+                                        alt="#">
+
+                                </div>
+                                <div class="song-item song-info1">
+                                    <p class="song-name">
+                                        <?php echo mb_strtoupper($row["song_name"]); 
+                                       
+                                        ?>
+                                    </p>
+                                    <p class="singer">
+
+                                        <?php echo $row["singer_name"];?>
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+
+                    <?php }?>
+                </ul>
+
+            </div>
+            <div class="col-xl-4 col-lg-4 col-sm-6">
+                <h3><?php echo "BXH ".mb_strtoupper($data["albums"]["region_name"]);?></h3>
+                <ul class="ranking">
+                    <?php $count=1?>
+                    <?php  while($row=mysqli_fetch_array($data["topregion"])){?>
+                    <li>
+
+                        <a href="<?php echo BASE_URL ;?>/Song/Listenit/<?php echo $row["id_song"]?>">
+                            <div class="song">
+                                <?php switch ($count) {
+                                case '1':?>
+                                <div class="song-item song-rank" style="color:#4a90e2;">
+                                    <?php echo "0".$count;?>
+                                </div>
+                                <?php  break; 
+                                 case '2':?>
+                                <div class="song-item song-rank" style="color:#50e3c2;">
+                                    <?php echo "0".$count;?>
+                                </div>
+                                <?php    break; 
+                                      case '3':?>
+                                <div class="song-item song-rank" style="color:red;">
+                                    <?php echo "0".$count;?>
+                                </div>
+                                <?php  break; 
+                                default:?>
+                                <div class="song-item song-rank" style="color:#333;">
+                                    <?php echo "0".$count;?>
+                                </div>
+                                <?php  break;
+                            } ?>
+                                <div class="song-item song-image">
+                                    <img src="<?php echo BASE_URL ;?>/public/images/<?php echo $row["song_img"]?>"
+                                        alt="#">
+                                </div>
+                                <div class="song-item song-info1">
+                                    <p class="song-name">
+                                        <?php echo mb_strtoupper($row["song_name"]); ?>
+                                    </p>
+                                    <p class="singer">
+
+                                        <?php echo $row["singer_name"]; 
+                           
+                        ?>
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <?php $count++;}?>
+                </ul>
+            </div>
+
+
+            <!-- <div class="col-xl-1 col-lg-1 col-sm-6"></div> -->
+        </div>
+    </div>
+
+</main>

@@ -1,0 +1,125 @@
+<main id="main" class="site-main">
+    <div class="container">
+        <div class="row mb-40 Album">
+            <div class="col-xl-5 col-lg-5 col-sm-6">
+                <!-- <div class="album-img">
+                    <img src="<?php echo BASE_URL;?>public/images/<?php echo $data["dataalbum"]["alnum_img"]  ?>" alt=""
+                        width="70%">
+                </div> -->
+                <div class="hover01 column">
+                    <div>
+                        <figure><img
+                                src="<?php echo BASE_URL;?>public/images/Album/<?php echo $data["dataalbum"]["alnum_img"]  ?>"
+                                alt="" width="100%"></figure>
+                        <span>Hover</span>
+                    </div>
+
+                </div>
+                <div class="des-album">
+                    <div class="info-body">
+                        <h3><?php echo ucwords($data["dataalbum"]["album_name"]);?></h3>
+                    </div>
+                    <a class="m-btn"
+                        href="<?php echo BASE_URL?>Song/PlayAlbum/<?php echo $data["dataalbum"]["id_album"]?>">Nghe
+                        Nhạc</a>
+                    <div>
+                    <?php  echo $data["SonginAlbum"]->num_rows." bài hát" ?>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="col-xl-7 col-lg-7 col-sm-12" style="padding-left: 0px;">
+            <h3>Bài Hát </h3>
+                <div class="songinalbum">
+               
+                    <?php  while ($row=mysqli_fetch_array($data["SonginAlbum"])){?>
+                    <ul class="ranking">
+
+                        <li>
+                            <a href="<?php echo BASE_URL;?>Song/Listenit/<?php echo $row["id_song"]?>">
+                                <div class="song">
+                                   
+                                    <div class="song-item song-image">
+                                        <img src="<?php echo BASE_URL?>/public/images/<?php echo $row["song_img"]?>"
+                                            alt="#">
+                                    </div>
+                                    <div class="song-item song-info1">
+                                        <p class="song-name">
+                                            <?php echo mb_strtoupper($row["song_name"]); ?>
+                                        </p>
+                                        <p class="singer">
+
+                                            <?php echo $row["singer_name"]; ?>
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+
+                    </ul>
+                    <?php $count++;} ?>
+                </div>
+                <br>
+                
+                <div class="care-album">
+                <h3>ALBUM KHÁC</h3>
+                    <div class="catergory owl-carousel owl-theme">
+                        <?php  while($row=mysqli_fetch_array($data["album"])){?>
+                        <div class="album-item">
+                            <a href="<?php echo BASE_URL;?>Song/AlbumShow/<?php echo $row["id_album"];?>">
+                                <img src="<?php echo BASE_URL ;?>public/images/Album/<?php echo $row["alnum_img"]?>"
+                                    alt="">
+                                <!-- <div class="album">
+                                    <div class="album-info2">
+                                        <p class="album-name">
+                                            <?php echo ucwords($row["album_name"]);?>
+                                        </p>
+                                        <p class="singer">
+
+                                        </p>
+                                    </div>
+                                </div> -->
+                            </a>
+                        </div>
+                        <?php } ?>
+                    </div>
+                </div>
+                <div class="care">
+                    <h3>Có Thể Bạn Quan Tâm</h3>
+                    <?php  while ($row=mysqli_fetch_array($data["song"])){?>
+                    <ul class="ranking">
+
+                        <li>
+                            <a href="<?php echo BASE_URL;?>Song/Listenit/<?php echo $row["id_song"]?>">
+                                <div class="song">
+                                    <div class="song-item song-image">
+                                        <img src="<?php echo BASE_URL?>/public/images/<?php echo $row["song_img"]?>"
+                                            alt="#">
+                                    </div>
+                                    <div class="song-item song-info1">
+                                        <p class="song-name">
+                                            <?php echo mb_strtoupper($row["song_name"]); ?>
+                                        </p>
+                                        <p class="singer">
+
+                                            <?php echo $row["singer_name"]; ?>
+                                        </p>
+                                        <audio crossorigin>
+                                            <source
+                                                src="<?php echo BASE_URL ;?>/public/songs/<?php echo $row["link_song"]?>"
+                                                type="audio/mpeg">
+                                        </audio>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+
+                    </ul>
+                    <?php } ?>
+                </div>
+            </div>
+
+
+        </div>
+</main>

@@ -1,0 +1,190 @@
+<form action="<?php echo BASE_URL;?>Song/Search/<?php echo $data['search']['text']; ?>" method="POST">
+    <div class="input-group mb-2 mr-sm-2">
+        <input type="text" class="form-control right" id="inlineFormInputGroupUsername2" placeholder="Search..."
+            name="text">
+        <button type="submit" name="submit" class="btn btn-info" style="margin-left: -2px;">
+            <img src="<?php echo BASE_URL;?>public/images/magnifying-glass.png" alt="icon"> Search
+        </button>
+    </div>
+</form>
+<table class="table table-striped bg-cl-table">
+    <div>
+        <p class="cen-ad" style="color: red"> 
+        <?php   echo $data['album1']['err'];
+                echo $data['album1']['album'];
+                echo $data['album1']['album1'];?></p>
+        <h1 class="cen-ad">Quản Lý Album</h1>
+        <p class="cen-ad">Bạn muốn
+            <a href="<?php echo BASE_URL;?>Album/Add" data-toggle="modal" data-target="#exampleModal1">
+                <i class="add-blu">
+                    Thêm
+                </i>
+            </a>một album?</p>
+
+        <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel2<?php echo $row['id_album'] ?>" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel1">Thêm album</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="<?php echo BASE_URL;?>Album/Add" method="post" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label for="">Tên album:</label>
+                                    <input type="text" class="form-control" id="" aria-describedby="textHelp1"
+                                        name="album">
+
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary right" name="submit">Xác nhận</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">
+                <input type="checkbox" name="check" class="checkbox" onclick="checkall('item', this)" id=""> Tất Cả
+            </th>
+
+            <th scope="col">Album</th>
+            <th scope="col">Ngày tạo</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <?php $count = 1;
+        while ($row = mysqli_fetch_array($data['album2'])) { 
+            ?>
+        <tr>
+            <th scope="row"><?php echo $count; ?></th>
+            <td><input type="checkbox" name="id[]" id="" class="item" class="checkbox"></td>
+
+            <td><?php echo $row['album_name']; ?></td>
+            <td><?php echo $row['registration_date']; ?></td>
+
+            <td><a href="" data-toggle="modal" data-target="#exampleModal2<?php echo $row['id_album']; ?>">Edit</a></td>
+            <div class="modal fade" id="exampleModal2<?php echo $row['id_album']; ?>" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel2<?php echo $row['id_album'] ?>" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel2<?php echo $row['id_album']; ?>">Sửa album
+                            </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="<?php echo BASE_URL;?>Album/Edit/<?php echo $row['id_album']; ?>"
+                                method="post" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <fieldset disabled>
+                                        <div class="form-group">
+                                            <label for="disabledTextInput">Tên album hiện tại:</label>
+                                            <input type="text" id="disabledTextInput" class="form-control"
+                                                value="<?php echo $row['album_name'] ?>" name="album">
+                                        </div>
+                                    </fieldset>
+                                    <div class="form-group">
+                                        <label for="">Tên album muốn sửa:</label>
+                                        <input type="text" class="form-control" id="" aria-describedby="textHelp1"
+                                            name="album1" value="<?php echo $row['album_name'] ?>">
+                                        <small id="textHelp1" class="form-text text-muted">
+                                            <?php echo "<p style=\"color:red;\"> " . $data['cate']['album_err'] . "</p>";
+                                                ?>
+                                        </small>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary right" name="submit">Xác nhận sửa</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <td><a href="" data-toggle="modal" data-target="#exampleModal3<?php echo $row['id_album']; ?>">Delete</a>
+            </td>
+            <div class="modal fade" id="exampleModal3<?php echo $row['id_album']; ?>" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel3<?php echo $row['id_album'] ?>" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel3<?php echo $row['id_album']; ?>">Xóa album
+                            </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="<?php echo BASE_URL;?>Album/Delete/<?php echo $row['id_album']; ?>"
+                                method="post" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <fieldset disabled>
+                                        <div class="form-group">
+                                            <label for="disabledTextInput">Tên tài khoản:</label>
+                                            <input type="text" id="disabledTextInput" class="form-control"
+                                                value="<?php echo $row['album_name'] ?>" name="album">
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <button type="submit" class="btn btn-primary right" name="submit">Xác nhận xóa</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </tr>
+        <?php $count++;
+             } ?>
+
+    </tbody>
+</table>
+<div class="cen-ad" style="font-size: 18px;">Tổng Album: <kbd><?php echo $data["page1"]['total_records'] ?></kbd></div>
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <li class="page-item">
+            <?php
+                $pre = $data["page1"]['current_page'] - 1;
+                if ($pre <= 0) {
+                    $pre = 1;
+                }
+                $next = $data["page1"]['current_page'] + 1;
+                if ($next >= $data["page1"]['total_page']) {
+                    $next = $data["page1"]['total_page'];
+                }
+            ?>
+            <a class="page-link" href="<?php echo BASE_URL;?>Album/Page/<?php echo $pre; ?>" tabindex="-1"
+                aria-disabled="true">
+                Trước</a></li>
+        <?php
+         for ($i = 1; $i <= $data["page1"]['total_page']; $i++) {
+            if ($i == $data["page1"]['current_page']) {?>
+
+        <li class='page-item'>
+            <a class="page-link1" href="<?php echo BASE_URL;?>Album/Page/<?php echo $i?>"><?php echo $i?></a>
+        </li>
+        <?php } else {?>
+
+        <a class="page-link" href="<?php echo BASE_URL;?>Album/Page/<?php echo $i?>"><?php echo $i?></a>
+        </li>
+        <?php   } ?>
+        </li>
+        <?php
+        }?>
+        <li class="page-item">
+            <a class="page-link" href="<?php echo BASE_URL;?>Album/Page/<?php echo $next; ?>">Sau</a>
+        </li>
+    </ul>
+</nav>

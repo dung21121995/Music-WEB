@@ -1,0 +1,354 @@
+<div class="content1">
+    <div class="title-block">
+        <h1 class="title"> BẢNG THỐNG KÊ </h1>
+        <p class="title-description"> Thống kê theo:
+            <span class="cl-yellow-err">Tuần</span>/
+            <span><a href="<?php echo BASE_URL;?>Admin/Month">Tháng</a>/</span>
+            <span><a href="<?php echo BASE_URL;?>Admin/Year">Năm</a></span>
+        </p>
+    </div>
+
+    <section>
+
+        <div class="row mb-40">
+            <div class="col-xl-4 col-lg-6 col-sm-12 bgcard">
+                <div class="card text-center">
+                    <div class="title">
+                        <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                        <h3>Bài Hát Được Nghe Nhiều Nhất</h3>
+                    </div>
+                    <div class="price">
+                        <!-- 
+                        <h4><sup></sup></h4>
+                     -->
+                    </div>
+                    <div class="option">
+
+                        <ul>
+                            <?php $count =1 ?>
+                            <?php   while ($row = mysqli_fetch_array($data['songw'])) {?>
+                            <li>
+
+                                <div class="listsong">
+                                    <?php switch ($count) {
+                                case '1':?>
+
+                                    <div class="song-top-item img-song">
+                                        <img src="<?php echo BASE_URL ;?>public/images/<?php echo $row["song_img"]?>"
+                                            alt="">
+                                    </div>
+                                    <div class="song-top-item song-top-info">
+                                        <p class="song-name" style="color:yellow;">
+                                            <?php echo ucwords($row["song_name"]);?> </p>
+                                        <p class="singer"><?php echo ucwords($row["singer_name"]); ?></p>
+                                    </div>
+                                    <div class="song-top-item viewssTimes">
+                                      
+                                            
+                                            <p style="color:yellow;"><?php echo ucwords($row["week"]);?><sup><img src="<?php echo BASE_URL;?>public/images/icon/playsongs.png" alt="" width="10px" height="10px"></sup></p>
+                                            
+                                      
+                                    </div>
+                                    <?php  break; 
+                                 case '2':?>
+
+                                    <div class="song-top-item img-song">
+                                        <img src="<?php echo BASE_URL ;?>public/images/<?php echo $row["song_img"]?>"
+                                            alt="">
+                                    </div>
+                                    <div class="song-top-item song-top-info">
+                                        <p class="song-name" style="color:#50e3c2;">
+                                            <?php echo ucwords($row["song_name"]);?> </p>
+                                        <p class="singer"><?php echo ucwords($row["singer_name"]); ?></p>
+                                    </div>
+                                    <div class="song-top-item viewssTimes">
+
+                                        <p style="color:#50e3c2;"><?php echo ucwords($row["week"]);?><sup><img src="<?php echo BASE_URL;?>public/images/icon/playsongs.png" alt="" width="10px" height="10px"></sup></p>
+                                    </div>
+                                    <?php    break; 
+                               
+                                default:?>
+
+                                    <div class="song-top-item img-song">
+                                        <img src="<?php echo BASE_URL ;?>public/images/<?php echo $row["song_img"]?>"
+                                            alt="">
+                                    </div>
+                                    <div class="song-top-item song-top-info">
+                                        <p class="song-name" style="color:#fff;">
+                                            <?php echo ucwords($row["song_name"]);?> </p>
+                                        <p class="singer"><?php echo ucwords($row["singer_name"]); ?></p>
+                                    </div>
+                                    <div class="song-top-item viewssTimes">
+                                        <p style="color:#fff;"><?php echo ucwords($row["week"]);?><sup><img src="<?php echo BASE_URL;?>public/images/icon/playsongs.png" alt="" width="10px" height="10px"></sup></p>
+                                    </div>
+                                    <?php  break;
+                            } ?>
+
+                                </div>
+
+                            </li>
+                            <?php $count++;}?>
+                        </ul>
+
+                    </div>
+                    <!-- <a href="#">Order Now </a> -->
+                </div>
+            </div>
+            <!-- END Col one -->
+            <div class="col-xl-4 col-lg-6 col-sm-12 bgcard">
+                <div class="card text-center">
+                    <div class="title">
+                        <i class="fa fa-plane" aria-hidden="true"></i>
+                        <h3>Lượt Đăng Ký</h3>
+                    </div>
+                    <div class="price">
+                        <h4><?php echo $data["singupTime"]->num_rows;?>
+                            <?php if (($data["singupTime"]->num_rows-$data["oldsingup"]->num_rows) > 0) {?>
+                            <sup
+                                style="color:green;">+<?php echo $data["singupTime"]->num_rows-$data["oldsingup"]->num_rows ;  ?></sup>
+
+                            <?php } else {?>
+                            <sup
+                                style="color:yellow;">+<?php echo $data["singupTime"]->num_rows-$data["oldsingup"]->num_rows ;  ?></sup>
+                            <?php }?>
+                        </h4>
+                    </div>
+                    <!-- <div class="option">
+                        <ul>
+                            <li> <i class="fa fa-check" aria-hidden="true"></i> 50 GB Space </li>
+                            <li> <i class="fa fa-check" aria-hidden="true"></i> 5 Domain Names </li>
+                            <li> <i class="fa fa-check" aria-hidden="true"></i> Unlimited Email Address
+                            </li>
+                            <li> <i class="fa fa-times" aria-hidden="true"></i> Live Support </li>
+                        </ul>
+                    </div> -->
+                    <!-- <a href="#">Order Now </a> -->
+                </div>
+            </div>
+            <!-- END Col two -->
+            <div class="col-xl-4 col-lg-6 col-sm-12 bgcard">
+                <div class="card text-center">
+                    <div class="title">
+                        <i class="fa fa-rocket" aria-hidden="true"></i>
+                        <h3>Album Được Quan Tâm</h3>
+                    </div>
+                    <div class="price">
+                        <h4><sup></sup>100</h4>
+                    </div>
+                    <div class="option">
+                        <ul>
+                            <li> <i class="fa fa-check" aria-hidden="true"></i> Unlimited GB Space </li>
+                            <li> <i class="fa fa-check" aria-hidden="true"></i> 30 Domain Names </li>
+                            <li> <i class="fa fa-check" aria-hidden="true"></i> Unlimited Email Address
+                            </li>
+                            <li> <i class="fa fa-check" aria-hidden="true"></i> Live Support </li>
+                        </ul>
+                    </div>
+                    <!-- <a href="#">Order Now </a> -->
+                </div>
+            </div>
+            <!-- END Col three -->
+        </div>
+        <div class="row">
+            <div class="col-xl-4 col-lg-6 col-sm-12 bgcard">
+                <div class="card text-center">
+                    <div class="title">
+                        <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                        <h3>Thể Loại Được Chọn</h3>
+                    </div>
+                    <div class="price">
+                        <!-- 
+                        <h4><sup></sup></h4>
+                     -->
+                    </div>
+                    <div class="option">
+
+                        <ul>
+                            <?php $count =1 ?>
+                            <?php   while ($row = mysqli_fetch_array($data['songw'])) {?>
+                            <li>
+
+                                <div class="listsong">
+                                    <?php switch ($count) {
+                                case '1':?>
+
+                                    <div class="song-top-item img-song">
+                                        <img src="<?php echo BASE_URL ;?>public/images/<?php echo $row["song_img"]?>"
+                                            alt="">
+                                    </div>
+                                    <div class="song-top-item song-top-info">
+                                        <p class="song-name" style="color:yellow;">
+                                            <?php echo ucwords($row["song_name"]);?> </p>
+                                        <p class="singer"><?php echo ucwords($row["singer_name"]); ?></p>
+                                    </div>
+                                    <div class="song-top-item viewssTimes">
+                                        <p style="color:yellow;"><?php echo ucwords($row["week"]);?></p>
+                                    </div>
+                                    <?php  break; 
+                                 case '2':?>
+
+                                    <div class="song-top-item img-song">
+                                        <img src="<?php echo BASE_URL ;?>public/images/<?php echo $row["song_img"]?>"
+                                            alt="">
+                                    </div>
+                                    <div class="song-top-item song-top-info">
+                                        <p class="song-name" style="color:#50e3c2;">
+                                            <?php echo ucwords($row["song_name"]);?> </p>
+                                        <p class="singer"><?php echo ucwords($row["singer_name"]); ?></p>
+                                    </div>
+                                    <div class="song-top-item viewssTimes">
+                                        <p style="color:#50e3c2;"><?php echo ucwords($row["week"]);?></p>
+                                    </div>
+                                    <?php    break; 
+                               
+                                default:?>
+
+                                    <div class="song-top-item img-song">
+                                        <img src="<?php echo BASE_URL ;?>public/images/<?php echo $row["song_img"]?>"
+                                            alt="">
+                                    </div>
+                                    <div class="song-top-item song-top-info">
+                                        <p class="song-name" style="color:#fff;">
+                                            <?php echo ucwords($row["song_name"]);?> </p>
+                                        <p class="singer"><?php echo ucwords($row["singer_name"]); ?></p>
+                                    </div>
+                                    <div class="song-top-item viewssTimes">
+                                        <p style="color:#fff;"><?php echo ucwords($row["week"]);?></p>
+                                    </div>
+                                    <?php  break;
+                            } ?>
+
+                                </div>
+
+                            </li>
+                            <?php $count++;}?>
+                        </ul>
+
+                    </div>
+                    <!-- <a href="#">Order Now </a> -->
+                </div>
+            </div>
+            <!-- END Col one -->
+            <div class="col-xl-4 col-lg-6 col-sm-12 bgcard">
+                <div class="card text-center">
+                    <div class="title">
+                        <i class="fa fa-plane" aria-hidden="true"></i>
+                        <h3>Lượt Truy Cập Trang </h3>
+                    </div>
+                    <div class="price">
+                        <!-- <h4><?php echo $data["singupTime"]->num_rows;?>
+                            <?php if (($data["singupTime"]->num_rows-$data["oldsingup"]->num_rows) > 0) {?>
+                            <sup
+                                style="color:green;">+<?php echo $data["singupTime"]->num_rows-$data["oldsingup"]->num_rows ;  ?></sup>
+
+                            <?php } else {?>
+                            <sup
+                                style="color:yellow;">+<?php echo $data["singupTime"]->num_rows-$data["oldsingup"]->num_rows ;  ?></sup>
+                            <?php }?>
+                        </h4> -->
+                    </div>
+                    <!-- <div class="option">
+                        <ul>
+                            <li> <i class="fa fa-check" aria-hidden="true"></i> 50 GB Space </li>
+                            <li> <i class="fa fa-check" aria-hidden="true"></i> 5 Domain Names </li>
+                            <li> <i class="fa fa-check" aria-hidden="true"></i> Unlimited Email Address
+                            </li>
+                            <li> <i class="fa fa-times" aria-hidden="true"></i> Live Support </li>
+                        </ul>
+                    </div> -->
+                    <!-- <a href="#">Order Now </a> -->
+                </div>
+            </div>
+            <!-- END Col two -->
+            <div class="col-xl-4 col-lg-6 col-sm-12 bgcard">
+                <div class="card text-center">
+                    <div class="title">
+                        <i class="fa fa-rocket" aria-hidden="true"></i>
+                        <h3>Tài Khoản Đăng Nhiều Nhất</h3>
+                    </div>
+                    <div class="price">
+                        <!-- <h4><sup></sup>100</h4> -->
+                    </div>
+                    <div class="option">
+                        <ul>
+                            <?php $count1 =1 ?>
+                            <?php   while ($row = mysqli_fetch_array($data['postnest'])) {?>
+                            <li>
+
+                                <div class="listsong">
+                                    <?php switch ($count1) {
+                                case '1':?>
+
+                                    <div class="song-top-item img-song">
+                                        <?php if (isset($row["user_img"])) {?>
+                                        <img src="<?php echo BASE_URL ;?>public/images/avatar/<?php echo $row["user_img"]?>"
+                                            alt="">
+                                        <?php }else {?>
+                                        <img src="<?php echo BASE_URL ;?>public/images/icon/user.png" alt="">
+                                        <?php }?>
+
+                                    </div>
+                                    <div class="song-top-item song-top-info">
+                                        <p class="song-name" style="color:yellow;">
+                                            <?php echo ucwords($row["user_fullname"]);?> </p>
+                                        <p class="singer"><?php echo $row["user_name"]; ?></p>
+                                    </div>
+                                    <div class="song-top-item viewssTimes">
+                                        <p style="color:yellow;"><?php echo$row["COUNT(song.id_song)"];?></p>
+                                    </div>
+                                    <?php  break; 
+                                 case '2':?>
+
+                                    <div class="song-top-item img-song">
+                                        <?php if (isset($row["user_img"])) {?>
+                                        <img src="<?php echo BASE_URL ;?>public/images/avatar/<?php echo $row["user_img"]?>"
+                                            alt="">
+                                        <?php }else {?>
+                                        <img src="<?php echo BASE_URL ;?>public/images/icon/user.png" alt="">
+                                        <?php }?>
+                                    </div>
+                                    <div class="song-top-item song-top-info">
+                                        <p class="song-name" style="color:#50e3c2;">
+                                            <?php echo ucwords($row["user_fullname"]);?> </p>
+                                        <p class="singer"><?php echo $row["user_name"]; ?></p>
+                                    </div>
+                                    <div class="song-top-item viewssTimes">
+                                        <p style="color:#50e3c2;"><?php echo $row["COUNT(song.id_song)"];?></p>
+                                    </div>
+                                    <?php    break; 
+                               
+                                default:?>
+
+                                    <div class="song-top-item img-song">
+                                        <?php if (isset($row["user_img"])) {?>
+                                        <img src="<?php echo BASE_URL ;?>public/images/avatar/<?php echo $row["user_img"]?>"
+                                            alt="">
+                                        <?php }else {?>
+                                        <img src="<?php echo BASE_URL ;?>public/images/icon/user.png" alt="">
+                                        <?php }?>
+                                    </div>
+                                    <div class="song-top-item song-top-info">
+                                        <p class="song-name" style="color:#fff;">
+                                            <?php echo ucwords($row["user_fullname"]);?> </p>
+                                        <p class="singer"><?php echo $row["user_name"]; ?></p>
+                                    </div>
+                                    <div class="song-top-item viewssTimes">
+                                        <p style="color:#fff;"><?php echo $row["COUNT(song.id_song)"];?></p>
+                                    </div>
+                                    <?php  break;
+                            } ?>
+
+                                </div>
+
+                            </li>
+                            <?php $count1++;}?>
+                        </ul>
+                    </div>
+                    <!-- <a href="#">Order Now </a> -->
+                </div>
+            </div>
+            <!-- END Col three -->
+        </div>
+
+    </section>
+</div>

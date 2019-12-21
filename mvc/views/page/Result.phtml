@@ -1,0 +1,89 @@
+<main id="main" class="site-main">
+    <div class="container">
+        <div class="row mb-40 notifi">
+            <div class="col-xl-12 col-lg-12col-sm-12">
+                <h3 class="tilte2">Kết Quả Tìm Kiếm cho từ khóa "<?php echo $_SESSION["search"]?>"</h3>
+            </div>
+            <div class="col-xl-12 col-lg-12col-sm-12">
+                <span class="result">Có khoảng <?php  echo $data["datasearch"]->num_rows +  $data["dataalbumsr"]->num_rows;?> kết quả được tìm thấy</span>
+            </div>
+
+        </div>
+        <div class="row mb-40 Album">
+            <h4 class="tilte2">Bài Hát</h4>
+            <span class="result1"><?php  echo $data["datasearch"]->num_rows;?></span>
+            <div class="col-xl-12 col-lg-12col-sm-12" style="padding-left: 0px;">
+                <div class="region">
+                    <?php  while ($row=mysqli_fetch_array($data["datasearch"])){?>
+                    <ul class="ranking">
+
+                        <li>
+                            <a href="<?php echo BASE_URL;?>Song/Listenit/<?php echo $row["id_song"]?>">
+                                <div class="song">
+                                    <div class="song-item song-image">
+                                        <img src="<?php echo BASE_URL?>/public/images/<?php echo $row["song_img"]?>"
+                                            alt="#">
+                                    </div>
+                                    <div class="song-item song-info1">
+                                        <p class="song-name">
+                                            <?php echo mb_strtoupper($row["song_name"]); ?>
+                                        </p>
+                                        <p class="singer">
+
+                                            <?php echo $row["singer_name"]; ?>
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+
+                    </ul>
+                    <?php } ?>
+                </div>
+                <br>
+
+
+
+            </div>
+        </div>
+        <div class="row mb-40 Album">
+            <h4 class="tilte2">Album</h4>
+            <span class="result1"><?php  echo $data["dataalbumsr"]->num_rows;?></span>
+            <div class="col-xl-12 col-lg-12col-sm-12" style="padding-left: 0px;">
+                <div class="region">
+                    <?php  while($row=mysqli_fetch_array($data["dataalbumsr"])){?>
+                    <ul class="ranking">
+
+                        <li>
+                            <a href="<?php echo BASE_URL;?>Song/AlbumShow/<?php echo $row["id_album"];?>">
+                                <div class="song">
+                                    <div class="song-item song-image">
+                                        <img src="<?php echo BASE_URL ;?>public/images/Album/<?php echo $row["alnum_img"]?>"
+                                            alt="">
+                                    </div>
+                                    <div class="song-item song-info1">
+
+                                        <p class="album-name">
+                                            <?php echo  mb_strtoupper($row["album_name"]);?>
+                                        </p>
+                                        <p class="singer">
+
+                                        </p>
+
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+
+                    </ul>
+                    <?php } ?>
+                </div>
+                <br>
+
+
+
+            </div>
+        </div>
+
+
+</main>
