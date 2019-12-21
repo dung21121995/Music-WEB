@@ -1,0 +1,194 @@
+  <form class="w-auto1" action="<?php echo BASE_URL?>Account/Search" method="POST">
+    <div class="input-group">
+        <input type="text" class="form-control right" id="inlineFormInputGroupUsername2" placeholder="Search..."
+            name="text">
+        <select class="custom-select" id="inputGroupSelect04" name="name">
+            <option value="1">Email</option>
+            <option value="2">Tên người dùng</option>
+        </select>
+        <div class="input-group-append">
+            <button type="submit" name="submit" class="btn btn-info" style="margin-left: -2px;">
+                <img src="<?php echo BASE_URL?>public/images/magnifying-glass.png" alt="icon"> Tìm kiếm
+            </button>
+        </div>
+    </div>
+</form>
+<table class="table table-striped">
+    <p class="cen-ad" style="color: red"> <?php echo $data['lock']['err'] . $row['user_name'];
+    echo $data['acc1']['err'] ?></p>
+    <h1 class="cen-ad">Quản Lý Tài Khoản Người Dùng</h1>
+    <p class="cen-ad">Bạn Có Muốn
+        <a href="<?php echo BASE_URL?>Account/Add">
+            <i class="add-blu">
+                Thêm
+            </i>
+        </a>&nbsp;Tài Khoản không?</p>
+
+    <!-- Modal -->  
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">
+                <input type="checkbox" name="check" class="checkbox" onclick="checkall('item', this)" id=""> Tất Cả
+            </th>
+            <th scope="col">Tên Tài Khoản</th>
+            <th scope="col">Họ tên </th>
+            <th scope="col">Email</th>
+            <th scope="col">Ngày tạo</th>
+            <th scope="col">Infor</th>
+            <th scope="col">Lock</th>
+            <th scope="col">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        $count =1 ;
+        while ($row = mysqli_fetch_array($data['acc'])) {
+                ?>
+                <tr>
+                    <th scope="row"><?php echo $count ?></th>
+                    <td><input type="checkbox" name="id[]" id="" class="item" class="checkbox"></td>
+                    <td><?php echo $row['user_name'] ?></td>
+                    <td><?php echo $row['user_fullname'] ?></td>
+                    <td><?php echo $row['email'] ?></td>
+                    <td><?php echo $row['registration_date'] ?></td>
+                    <td><a href="" data-toggle="modal" data-target="#exampleModal1<?php echo $row['id_user'] ?>">Thông Tin</a></td>
+                    <!-- Modal Infor-->
+                    <div class="modal fade" id="exampleModal1<?php echo $row['id_user'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1<?php echo $row['id_user'] ?>" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel1<?php echo $row['id_user'] ?>">Thông tin tài khoản</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div style="text-align: center;">
+                                        <img src="<?php echo $row['user_img']; ?>" alt="Error" width="150px" height="150px" style="border-radius: 20px;">
+                                    </div>
+                                    <div>
+                                        <p>Tên tài khoản: <span style="color: blue"> <?php echo $row['user_name']; ?></span></p>
+                                    </div>
+                                    <div>
+                                        <p>Ngày tạo: <span style="color: blue"><?php echo $row['registration_date']; ?></span></p>
+                                    </div>
+                                    <div>
+                                        <p>Tên người dùng: <span style="color: blue"><?php echo $row['user_fullname']; ?></span></p>
+                                    </div>
+                                    <div>
+                                        <p>Elmail:<span style="color: blue"> <?php echo $row['email']; ?></span></p>
+                                    </div>
+                                    <div>
+                                        <p>Năm sinh:<span style="color: blue"> <?php echo $row['birthday']; ?></span></p>
+                                    </div>
+                                    <div>
+                                        <p>Địa chỉ:<span style="color: blue"> <?php echo $row['address']; ?></span></p>
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Modal Infor -->
+                    <?php if ($row['time_lock'] != 1) { ?>
+                        <td><a href="" data-toggle="modal" data-target="#exampleModal<?php echo $row['id_user']; ?>">Khóa</a></td>
+                        <!-- Modal Lock -->
+                        <div class="modal fade" id="exampleModal<?php echo $row['id_user']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel<?php echo $row['id_user'] ?>" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel<?php echo $row['id_user']; ?>">Khóa tài khoản</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="<?php echo BASE_URL?>Account/LockAcc/<?php echo $row['id_user']; ?>" method="post" enctype="multipart/form-data">
+                                            <div class="form-group">
+                                                <fieldset disabled>
+                                                    <div class="form-group">
+                                                        <label for="disabledTextInput">Tên tài khoản:</label>
+                                                        <input type="text" id="disabledTextInput" class="form-control" placeholder="<?php echo $row['user_name'] ?>">
+                                                    </div>
+                                                </fieldset>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleFormControlTextarea1">Nội dung/ lí do:</label>
+                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="text"></textarea>
+                                            </div>
+                                            <button type="reset" class="btn btn-primary">Nhập lại</button>
+                                            <button type="submit" class="btn btn-primary right" name="submit">Xác nhận khóa</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End modal lock -->
+                    <?php  } else { ?>
+                        <td><a href="" data-toggle="modal" data-target="#exampleModal<?php echo $row['id_user']; ?>">Open</a></td>
+                        <!-- Modal Lock -->
+                        <div class="modal fade" id="exampleModal<?php echo $row['id_user']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel<?php echo $row['id_user'] ?>" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel<?php echo $row['id_user']; ?>">Mở khóa tài khoản</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="<?php echo BASE_URL?>Account/OpenAcc/<?php echo $row['id_user']; ?>" method="post" enctype="multipart/form-data">
+                                            <div class="form-group">
+                                                <fieldset disabled>
+                                                    <div class="form-group">
+                                                        <label for="disabledTextInput">Tên tài khoản:</label>
+                                                        <input type="text" id="disabledTextInput" class="form-control" placeholder="<?php echo $row['user_name'] ?>">
+                                                    </div>
+                                                </fieldset>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary right" name="submit">Xác nhận Mở</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php  } ?>
+
+                    <td><a href="" data-toggle="modal" data-target="#exampleModal2<?php echo $row['id_user']; ?>">Delete</a></td>
+                    <!-- Modal Delete -->
+                    <div class="modal fade" id="exampleModal2<?php echo $row['id_user']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2<?php echo $row['id_user'] ?>" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel2<?php echo $row['id_user']; ?>">Xóa tài khoản</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="<?php echo BASE_URL?>Account/DeleteAcc/<?php echo $row['id_user']; ?>" method="post" enctype="multipart/form-data">
+                                        <div class="form-group">
+                                            <fieldset disabled>
+                                                <div class="form-group">
+                                                    <label for="disabledTextInput">Tên tài khoản:</label>
+                                                    <input type="text" id="disabledTextInput" class="form-control" placeholder="<?php echo $row['user_name'] ?>">
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary right" name="submit">Xác nhận xóa</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </tr>
+        <?php 
+        $count++;    
+    }
+        ?>
+    </tbody>
+</table>
