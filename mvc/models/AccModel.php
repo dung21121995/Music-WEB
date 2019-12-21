@@ -160,4 +160,36 @@ class AccModel extends DB
         $sql = ("SELECT count(id_user) from user_web where `id_role` = 'S';");
         return mysqli_query($this->con, $sql);
     }
+     public function TimKiemNvByAcc($varchar,$email)
+    {
+        $sql = ("SELECT * FROM `user_web` WHERE $email REGEXP '$varchar' AND `id_role` REGEXP 'Nv';");
+        return mysqli_query($this->con, $sql);
+    }
+    public function CountNvByAcc($varchar,$email)
+    {
+        $sql = ("SELECT count(id_user) FROM `user_web` WHERE $email REGEXP '$varchar' AND `id_role` REGEXP 'Nv';");
+        return mysqli_query($this->con, $sql);
+    }
+
+    public function TimKiemNvBySinger($varchar,$email)
+    {
+        $sql = ("SELECT * FROM `user_web` WHERE $email REGEXP '$varchar' AND `id_role` REGEXP 'S';");
+        return mysqli_query($this->con, $sql);
+    }
+    public function CountNvBySinger($varchar,$email)
+    {
+        $sql = ("SELECT count(id_user) FROM `user_web` WHERE $email REGEXP '$varchar' AND `id_role` REGEXP 'S';");
+        return mysqli_query($this->con, $sql);
+    }
+    
+    public function TimKiemNvByAcc1($varchar,$email)
+    {
+        $sql = ("SELECT * FROM `user_web` WHERE $email REGEXP '$varchar' AND `id_role` REGEXP 'U';");
+        return mysqli_query($this->con, $sql);
+    }
+    public function CountNvByAcc1($varchar,$email)
+    {
+        $sql = ("SELECT count(id_user) FROM `user_web` WHERE $email REGEXP '$varchar' AND `id_role` REGEXP 'U';");
+        return mysqli_query($this->con, $sql);
+    }
 }
